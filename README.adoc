@@ -2,21 +2,57 @@
 :icons: font
 :MoSCoW: https://fr.wikipedia.org/wiki/M%C3%A9thode_MoSCoW[MoSCoW]
 
-Ce dépôt concerne les rendus de mailto:A_changer@etu.univ-tlse2.fr[Jonh Doe].
+Ce dépôt concerne les rendus de mailto:julien.bizet@etu.univ-tlse2.fr[Julien BIZET].
 
 == TP1
 
 .Exemple de code
 [source,java]
 ---
-@Given("today is Sunday")
-public void today_is_sunday() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+@Given("Ajourd'hui on est {string}")
+    public void aujourdhui_on_est_dimanche(String actualday) {
+        actualDay = actualday;
+}
+@When("Est ce qu'on est vendredi")
+public void est_ce_qu_on_est_vendredi() {
+    answer = "vendredi".equals(actualDay) ? "TGIF" : "Nope";
+}
+@Then("La reponse doit etre {string}")
+public void la_reponse_doit_etre(String attendu) {
+    if(!attendu.equals(answer)){
+        throw new AssertionError("la reponse attendu est " + attendu + " mais la reponse est " + answer);
+    }
 }
 ---
 
-.Exemple d'image insérée en asciidoc
-image::artifacts-r303.svg[width=80%]
+.is_it_friday_yet.feature
+[source,Gherkin]
+---
+Feature: On est vendredi?
+  On est vendredi
+---
+  Scenario: On est dimanche mais est ce qu'on est vendredi ?
+    Given Ajourd'hui on est "dimanche"
+    When Est ce qu'on est vendredi
+    Then La reponse doit etre "Nope"
+---    
+  Scenario: On est vendredi mais est ce qu'on est vendredi ?
+    Given Ajourd'hui on est "vendredi"
+    When Est ce qu'on est vendredi
+    Then La reponse doit etre "TGIF"
+---
+  Scenario Outline: On est vendredi ?
+    Given Ajourd'hui on est "<day>"
+    When Est ce qu'on est vendredi
+    Then La reponse doit etre "<answer>"
+    Examples:
+      | day           | answer |
+      | vendredi      | TGIF   |
+      | dimanche      | Nope   |
+      | peu importe ! | Nope   |
+---
+
+.Resultat TP1
+image::resultat_TP1.png[width=80%]
 
 == TP2...
