@@ -173,3 +173,23 @@ L'objectif est de vérifier que chaque document de sprint review répond aux att
 
 .Resultat TP3
 image::resultat_TP3.png[width=80%]
+
+== TP4
+
+.Report Txt
+[source, shell]
+---
+include::report.txt[]
+---
+
+.Report cucumber en ligne de commande
+image::resultat_TP4_partie2.png[width=80%]
+---
+.Report CukeDoctor
+image::resultat_TP4_partie3.png[width=80%]
+chemin pour retrouver le fichier au complet ./hellocucumber/target/cukedoctor/documentation.adoc
+
+---
+
+.Report Serinity
+image::resultat_TP4_partie5.png[width=80%]
